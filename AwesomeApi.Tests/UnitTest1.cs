@@ -20,8 +20,11 @@ public class Fixture
 {
     public Fixture()
     {
-        using var factory = new WebApplicationFactory<Program>();
-        using var client = factory.CreateClient();
-        using var httpResponse = client.GetAsync("ok").Result;
+        Task.Run(() =>
+        {
+            using var factory = new WebApplicationFactory<Program>();
+            using var client = factory.CreateClient();
+            using var httpResponse = client.GetAsync("ok").Result;
+        });
     }
 }
