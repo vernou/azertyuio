@@ -2,23 +2,9 @@ using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace AwesomeApi.Tests;
 
-public class UnitTest1 : IClassFixture<Fixture>
+public class UnitTest1
 {
-    [Fact]
-    public void Test()
-    { }
-}
-
-public class UnitTest2 : IClassFixture<Fixture>
-{
-    [Fact]
-    public void Test()
-    { }
-}
-
-public class Fixture
-{
-    public Fixture()
+    static UnitTest1()
     {
         Task.Run(() =>
         {
@@ -27,4 +13,25 @@ public class Fixture
             using var httpResponse = client.GetAsync("ok").Result;
         });
     }
+
+    [Fact]
+    public void Test()
+    { }
+}
+
+public class UnitTest2
+{
+    static UnitTest2()
+    {
+        Task.Run(() =>
+        {
+            using var factory = new WebApplicationFactory<Program>();
+            using var client = factory.CreateClient();
+            using var httpResponse = client.GetAsync("ok").Result;
+        });
+    }
+
+    [Fact]
+    public void Test()
+    { }
 }
