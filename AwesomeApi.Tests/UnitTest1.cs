@@ -2,29 +2,35 @@ using Microsoft.AspNetCore.Mvc.Testing;
 
 namespace AwesomeApi.Tests;
 
-public class UnitTest1 
+public class UnitTest1
 {
     static UnitTest1()
     {
-        using var factory = new WebApplicationFactory<Program>();
-        using var client = factory.CreateClient();
-        using var httpResponse = client.GetAsync("ok").Result;
-    } 
+        Task.Run(async () =>
+        {
+            using var factory = new WebApplicationFactory<Program>();
+            using var client = factory.CreateClient();
+            using var httpResponse = await client.GetAsync("ok");
+        });
+    }
 
     [Fact]
     public void Test()
     { }
-} 
+}
 
 public class UnitTest2
 {
     static UnitTest2()
     {
-        using var factory = new WebApplicationFactory<Program>();
-        using var client = factory.CreateClient();
-        using var httpResponse = client.GetAsync("ok").Result;
+        Task.Run(async () =>
+        {
+            using var factory = new WebApplicationFactory<Program>();
+            using var client = factory.CreateClient();
+            using var httpResponse = await client.GetAsync("ok");
+        });
     }
-    
+
     [Fact]
     public void Test()
     { }
